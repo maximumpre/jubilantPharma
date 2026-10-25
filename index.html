@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jubilant Pharma | Login</title>
+    <link href="./output.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
+  <body class="min-h-screen bg-[#f1f1f1] font-sans text-[#454545]">
+    <header
+      class="flex h-22 items-center justify-between bg-white px-5 shadow-md"
+    >
+      <img
+        src="./images/logo-one.png"
+        alt="Jubilant Pharma"
+        class="w-25 object-contain"
+      />
+      <img
+        src="./images/logo-two.png"
+        alt="Aptia 365"
+        class="w-25 object-contain md:w-33"
+      />
+    </header>
+
+    <main class="mx-auto w-full max-w-6xl px-4 py-10 md:py-16 mt-14">
+      <section
+        class="rounded-md bg-white p-6 md:py-15 md:px-20 shadow-[0_4px_12px_rgba(0,0,0,0.18)]"
+      >
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <section>
+            <h1 class="text-3xl font-normal md:text-4xl">Returning Users</h1>
+            <p class="mt-1 text-lg text-gray-500 md:text-xl">
+              Log in to your existing account.
+            </p>
+
+            <form class="mt-8">
+              <div class="mb-6">
+                <label for="email" class="mb-2 block text-lg text-gray-500"
+                  >Email (Username)</label
+                >
+                <input
+                  id="email"
+                  name="email"
+                  type="text"
+                  class="h-14 w-[90%] rounded border border-gray-300 bg-white px-3 shadow-inner outline-none focus:border-green-700"
+                />
+              </div>
+
+              <div class="mb-6">
+                <label for="password" class="mb-2 block text-lg text-gray-500"
+                  >Password</label
+                >
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  class="h-14 w-[90%] rounded border border-gray-300 bg-white px-3 shadow-inner outline-none focus:border-green-700"
+                />
+              </div>
+
+              <button
+                type="submit"
+                class="rounded-full border-2 border-gray-400 bg-gray-300 px-7 py-3 text-lg text-white hover:bg-gray-400"
+              >
+                Login
+              </button>
+            </form>
+
+            <p class="mt-5 mb-7 text-base text-gray-500 md:text-lg">
+              Forgot
+              <a href="./forgot-username.html" class="text-green-800 hover:underline">Username</a> or
+              <a href="./forgot-password.html" class="text-green-800 hover:underline">Password</a>?
+            </p>
+          </section>
+
+          <section
+            class="border-t border-gray-300 pt-6 md:border-l md:border-t-0 md:pl-12 md:pt-0"
+          >
+            <h2 class="text-3xl font-normal md:text-4xl">New Users</h2>
+            <p class="mt-1 text-lg text-gray-500 md:text-xl">
+              Register your account now.
+            </p>
+
+            <a
+              href="#"
+              class="mt-7 inline-block rounded-full border-2 border-[#35c98a] px-7 py-3 text-lg text-[#173e4c] transition hover:bg-[#35c98a]"
+              >Get Started</a
+            >
+
+            <div class="mt-7 space-y-4">
+              <a
+                href="#"
+                class="flex items-center gap-2 text-base text-[#347653] hover:underline md:text-lg"
+              >
+                <span
+                  class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#34845d] text-white"
+                >
+                  <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </span>
+                Helpful hints for accessing your account
+              </a>
+              <a
+                href="#"
+                class="flex items-center gap-2 text-base text-[#347653] hover:underline md:text-lg"
+              >
+                <span
+                  class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#34845d] text-white"
+                >
+                  <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </span>
+                Learn about Multifactor Authentication
+              </a>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer
+      class="flex mt-30 min-h-[130px] items-center justify-center bg-[#123b49] px-4 text-center text-white"
+    >
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="#" class="hover:underline">PRIVACY NOTICE</a>
+        <span>|</span>
+        <a href="#" class="hover:underline">TERMS OF USE</a>
+      </div>
+    </footer>
+  </body>
+</html>

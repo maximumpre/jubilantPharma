@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forgot Username | Jubilant Pharma</title>
+  <link href="./output.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body class="min-h-screen bg-[#f1f1f1] font-sans text-[#454545]">
+  <header class="flex h-22 items-center justify-between bg-white px-5 shadow-md md:px-12">
+    <img src="./images/logo-one.png" alt="Jubilant Pharma" class="w-25 object-contain">
+    <img src="./images/logo-two.png" alt="Aptia 365" class="w-25 object-contain md:w-33">
+  </header>
+
+  <main class="mx-auto w-full max-w-3xl px-4 py-10 md:py-16 mt-14">
+    <section class="rounded-md bg-white p-6 shadow-[0_4px_12px_rgba(0,0,0,0.18)] md:p-10">
+      <h1 class="text-2xl font-normal md:text-4xl">Forgot Username</h1>
+      <p class="mt-5 text-sm text-gray-500 md:text-lg">To retrieve your Username, please provide your information below.</p>
+
+      <form class="mt-6">
+        <div class="mb-5">
+          <label for="ssn" class="mb-2 block text-sm text-gray-500 md:text-lg">Last 4 Digits of Social Security Number:</label>
+          <input id="ssn" name="ssn" type="text" inputmode="numeric" maxlength="4" class="h-14 w-full rounded border border-gray-300 px-3 shadow-inner outline-none focus:border-[#35c98a]">
+        </div>
+
+        <div class="mb-5">
+          <label for="last-name" class="mb-2 block text-sm text-gray-500 md:text-lg">Last Name:</label>
+          <input id="last-name" name="last-name" type="text" class="h-14 w-full rounded border border-gray-300 px-3 shadow-inner outline-none focus:border-[#35c98a]">
+        </div>
+
+        <div class="mb-5">
+          <label for="dob" class="mb-2 block text-sm text-gray-500 md:text-lg">Date of Birth (MM/DD/YYYY):</label>
+          <input id="dob" name="dob" type="text" placeholder="MM/DD/YYYY" class="h-14 w-full rounded border border-gray-300 px-3 shadow-inner outline-none focus:border-[#35c98a]">
+        </div>
+
+        <fieldset class="mb-5">
+          <legend class="mb-3 text-sm text-gray-500 md:text-base">Country</legend>
+          <div class="flex flex-wrap items-center gap-6">
+            <label class="flex items-center gap-2 text-sm md:text-base">
+              <input type="radio" name="country" value="us" checked class="accent-[#35a86f]">
+              United States
+            </label>
+            <label class="flex items-center gap-2 text-sm md:text-base">
+              <input type="radio" name="country" value="other" class="accent-[#35a86f]">
+              Other
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="mb-6">
+          <label for="postal-code" class="mb-2 block text-sm text-gray-500 md:text-lg">ZIP/Postal Code:</label>
+          <input id="postal-code" name="postal-code" type="text" autocomplete="postal-code" class="h-14 w-full rounded border border-gray-300 px-3 shadow-inner outline-none focus:border-[#35c98a]">
+        </div>
+
+        <div class="mb-6">
+          <p class="text-sm text-gray-900 md:text-lg">reCaptcha Security Check</p>
+          <p class="mb-3 text-md text-gray-500">Check the box next to "I'm not a robot". If a pop-up window appears, simply follow the instructions at the top and select the Verify button.</p>
+          <div class="flex min-h-[82px] max-w-[300px] items-center justify-between border border-gray-300 bg-white px-4 shadow-sm">
+            <label class="flex items-center gap-3 text-sm text-gray-700">
+              <input type="checkbox" class="h-5 w-5 accent-[#35a86f]">
+              I'm not a robot
+            </label>
+            <div class="flex flex-col items-center text-gray-500">
+              <i class="fa-solid fa-rotate text-2xl text-[#4285f4]"></i>
+              <span class="text-[10px]">reCAPTCHA</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-end gap-5">
+          <a href="./index.html" class="rounded-full  border border-[#d9e2e7] px-6 py-2 text-lg text-[#47718a] transition-colors hover:border-[#35a86f] hover:text-[#35a86f]">Cancel</a>
+          <button type="submit" class="rounded-full border-2 border-gray-400 bg-gray-300 px-6 py-2 text-lg text-white">Next</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="flex mt-20 min-h-[130px] items-center justify-center bg-[#123b49] px-4 text-center text-sm text-white">
+    <div class="flex flex-wrap justify-center gap-3">
+      <a href="#" class="hover:underline">PRIVACY NOTICE</a>
+      <span>|</span>
+      <a href="#" class="hover:underline">TERMS OF USE</a>
+    </div>
+  </footer>
+</body>
+</html>
