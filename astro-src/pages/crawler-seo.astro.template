@@ -1,0 +1,250 @@
+---
+/**
+ * Step 5 creates `astro-src/pages/crawler-seo.astro` matching THIS project's
+ * human landing shell. Step 1 does NOT create this file.
+ *
+ * HARD RULES (Step 5):
+ *   1. No executable JS — only `type="application/ld+json"` scripts permitted.
+ *   2. Match THIS project's real landing shell (anti-contamination: never paste
+ *      another archetype's login chrome into the wrong project).
+ *   3. DOM ORDER: Header → Breadcrumb → Login (H1 + silently disabled form) →
+ *      Rich SSR copy (≥ 300 words) → FAQ (`<details><summary>`) →
+ *      Related searches → Footer.
+ *   5. Visible keywords before footer (≥ 25 terms). No sr-only / display:none tricks.
+ *   6. Links: authentic destinations or `/api/login-out`; never target="_blank".
+ *   7. Desktop + mobile fidelity without overflow.
+ *   8. Project domain never as visible body text; brand entity in footer copyright.
+ *   9. Typography from project globals / astro-font — never force Geist.
+ */
+import "../../app/globals.css"
+import "../styles/astro-font.css"
+import SeoHead from "../components/seo-head.astro"
+import { SeoJsonLd } from "@/components/seo-json-ld"
+import { PAGE_H1_HEADING } from "@/lib/seo-keywords"
+import { SITE_DESCRIPTION, SITE_VISIBLE_KEYWORDS } from "@/lib/seo-metadata"
+import { SITE_DISPLAY_NAME } from "@/lib/site-url"
+
+const visibleKeywords = SITE_VISIBLE_KEYWORDS.join(", ")
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <SeoHead />
+    <SeoJsonLd />
+  </head>
+  <body class="font-sans antialiased">
+    
+    <div class="min-h-screen flex flex-col justify-between">
+      <header>
+        <!-- Project brand logo with descriptive alt -->
+      </header>
+
+      <main class="w-full max-w-xl mx-auto px-4 py-8">
+        <!-- Breadcrumb Hierarchy — must match JSON-LD BreadcrumbList (Home › Sign In) -->
+        <nav aria-label="Breadcrumb" class="mb-4 text-xs text-neutral-500">
+          <ol class="flex items-center space-x-1.5">
+            <li><a href="/" class="hover:underline">Home</a></li>
+            <li><span class="mx-1">›</span></li>
+            <li class="font-medium text-neutral-800" aria-current="page">Sign In</li>
+          </ol>
+        </nav>
+
+        <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 mb-3">
+          {PAGE_H1_HEADING}
+        </h1>
+        <p class="text-base text-neutral-600 mb-6">{SITE_DESCRIPTION}</p>
+
+        
+        <form aria-label="Account login" class="space-y-4 mb-8">
+          <div>
+            <label for="user-id" class="block text-xs font-medium text-neutral-700 mb-1">User ID or Username</label>
+            <input id="user-id" type="text" disabled readonly aria-disabled="true" class="w-full px-3 py-2 border border-neutral-300 rounded-md bg-neutral-100 text-neutral-500 cursor-not-allowed" placeholder="Enter your ID" />
+          </div>
+          <div>
+            <label for="auth-password" class="block text-xs font-medium text-neutral-700 mb-1">Password</label>
+            <input id="auth-password" type="password" disabled readonly aria-disabled="true" class="w-full px-3 py-2 border border-neutral-300 rounded-md bg-neutral-100 text-neutral-500 cursor-not-allowed" placeholder="••••••••" />
+          </div>
+          <button type="button" disabled aria-disabled="true" class="w-full py-2 px-4 rounded-md bg-neutral-400 text-white font-medium cursor-not-allowed">
+            Sign In
+          </button>
+          <div class="flex justify-between items-center text-xs text-neutral-600 pt-2">
+            <a href="/api/login-out" class="hover:underline">Forgot User ID or Password?</a>
+            <a href="/api/login-out" class="hover:underline">New User Registration</a>
+          </div>
+        </form>
+
+        <!-- Rich Semantic SSR Copy (≥ 300 words required across all archetypes) -->
+        <section class="mt-8 space-y-6 text-sm text-neutral-600 leading-relaxed border-t border-neutral-100 pt-6">
+          <article aria-labelledby="section-overview">
+            <h2 id="section-overview" class="text-base font-semibold text-neutral-900 mb-2">
+              {SITE_DISPLAY_NAME} Portal Overview
+            </h2>
+            <p>
+              Welcome to the official {SITE_DISPLAY_NAME} self-service member gateway. This enterprise administrative portal provides enrolled participants, employees, and authorized beneficiaries with secure, centralized access to their comprehensive account details, health and financial programs, and personalized benefits management.
+            </p>
+          </article>
+
+          <article aria-labelledby="section-highlights">
+            <h2 id="section-highlights" class="text-base font-semibold text-neutral-900 mb-2">
+              Key Programs & Domain Services
+            </h2>
+            <p class="mb-2">
+              Eligible members and participants can access specialized programs and manage their active portfolio directly:
+            </p>
+            <ul class="list-disc pl-5 space-y-1 text-neutral-700">
+              <li>Comprehensive account dashboards for real-time portfolio, benefit balance, and coverage tracking</li>
+              <li>Secure claims submission, document upload, and automated status notifications</li>
+              <li>Annual election management, life event updates, and dependent verification services</li>
+              <li>Direct deposit management, electronic statements, and tax documentation archives</li>
+            </ul>
+          </article>
+
+          <article aria-labelledby="section-support">
+            <h2 id="section-support" class="text-base font-semibold text-neutral-900 mb-2">
+              Account Sign In & Member Support
+            </h2>
+            <p>
+              Authorized members can access their account using their verified login credentials. For assistance with multi-factor authentication, forgotten usernames or passwords, or first-time enrollment verification, use the secure self-service recovery links above or contact the dedicated member support services desk.
+            </p>
+          </article>
+
+          
+          <article aria-labelledby="section-faq" class="space-y-3 pt-2">
+            <h2 id="section-faq" class="text-base font-semibold text-neutral-900">
+              Frequently Asked Questions
+            </h2>
+            <details id="faq-sign-in" class="group rounded-md border border-neutral-200 bg-neutral-50/50 p-3">
+              <summary class="cursor-pointer font-medium text-neutral-800 list-none flex justify-between items-center">
+                <span>How do I sign in to my {SITE_DISPLAY_NAME} account?</span>
+                <span class="text-neutral-400 group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <p class="mt-2 text-neutral-600">
+                Enter your registered User ID and password. First-time users can register by selecting the enrollment link and verifying their identity.
+              </p>
+            </details>
+            <details id="faq-recovery" class="group rounded-md border border-neutral-200 bg-neutral-50/50 p-3">
+              <summary class="cursor-pointer font-medium text-neutral-800 list-none flex justify-between items-center">
+                <span>What should I do if I forgot my login credentials?</span>
+                <span class="text-neutral-400 group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <p class="mt-2 text-neutral-600">
+                Use the self-service recovery links on the sign in page to reset your password or retrieve your username via secure multi-factor verification.
+              </p>
+            </details>
+            <details id="faq-benefits" class="group rounded-md border border-neutral-200 bg-neutral-50/50 p-3">
+              <summary class="cursor-pointer font-medium text-neutral-800 list-none flex justify-between items-center">
+                <span>Where can I view my account benefits, coverage, and plan details?</span>
+                <span class="text-neutral-400 group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <p class="mt-2 text-neutral-600">
+                Once authenticated, navigate to your centralized account dashboard to review plan summaries, balance details, claims, and election options.
+              </p>
+            </details>
+            <details id="faq-claims" class="group rounded-md border border-neutral-200 bg-neutral-50/50 p-3">
+              <summary class="cursor-pointer font-medium text-neutral-800 list-none flex justify-between items-center">
+                <span>How do I file claims or upload substantiation documentation?</span>
+                <span class="text-neutral-400 group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <p class="mt-2 text-neutral-600">
+                Submit claims online through the secure claims portal by attaching itemized receipts, invoices, or Explanation of Benefits (EOB) statements.
+              </p>
+            </details>
+            <details id="faq-enrollment" class="group rounded-md border border-neutral-200 bg-neutral-50/50 p-3">
+              <summary class="cursor-pointer font-medium text-neutral-800 list-none flex justify-between items-center">
+                <span>When can I make changes to my account elections or coverage?</span>
+                <span class="text-neutral-400 group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <p class="mt-2 text-neutral-600">
+                Changes can be made during the annual open enrollment window or within 30 days of experiencing a qualifying life event.
+              </p>
+            </details>
+            <details id="faq-support" class="group rounded-md border border-neutral-200 bg-neutral-50/50 p-3">
+              <summary class="cursor-pointer font-medium text-neutral-800 list-none flex justify-between items-center">
+                <span>How can I access my account on mobile or contact customer support?</span>
+                <span class="text-neutral-400 group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <p class="mt-2 text-neutral-600">
+                Download the official mobile app from the App Store or Google Play, or contact the dedicated member service helpline during standard business hours.
+              </p>
+            </details>
+          </article>
+        </section>
+
+        <!-- FAQPage Schema for Google Rich Snippets -->
+        <script type="application/ld+json" set:html={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": `How do I sign in to my ${SITE_DISPLAY_NAME} account?`,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Enter your registered User ID and password. First-time users can register by selecting the enrollment link and verifying their identity."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What should I do if I forgot my login credentials?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use the self-service recovery links on the sign in page to reset your password or retrieve your username via secure multi-factor verification."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Where can I view my account benefits, coverage, and plan details?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Once authenticated, navigate to your centralized account dashboard to review plan summaries, balance details, claims, and election options."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I file claims or upload substantiation documentation?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Submit claims online through the secure claims portal by attaching itemized receipts, invoices, or Explanation of Benefits (EOB) statements."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "When can I make changes to my account elections or coverage?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Changes can be made during the annual open enrollment window or within 30 days of experiencing a qualifying life event."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How can I access my account on mobile or contact customer support?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Download the official mobile app from the App Store or Google Play, or contact the dedicated member service helpline during standard business hours."
+              }
+            }
+          ]
+        })} />
+
+        <!-- Visible Related Searches (Keywords Quota) -->
+        {visibleKeywords.length > 0 ? (
+          <section class="mt-8 border-t border-neutral-200 pt-6" aria-label="Related searches">
+            <p class="text-sm leading-relaxed text-neutral-600">
+              Related searches: {visibleKeywords}
+            </p>
+          </section>
+        ) : null}
+      </main>
+
+      <footer class="mt-auto border-t border-neutral-200 py-6 text-xs text-neutral-500">
+        <!-- 
+          Project footer: replicate THIS project's actual footer links discovered on [PROVIDED_URL].
+          - Discovered authentic external URLs: e.g. <a href="https://brand.com/privacy" class="hover:underline">Privacy Policy</a>
+          - Unhandled or session-gated links: <a href="/api/login-out" class="hover:underline">Contact Support</a>
+          - STRICT: NO target="_blank" (all links open in same window).
+        -->
+      </footer>
+    </div>
+  </body>
+</html>

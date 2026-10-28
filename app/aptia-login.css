@@ -1,0 +1,593 @@
+/* Aptia365 / HOLL08 login — reverse-engineered from
+   https://auth.aptia365.com/HOLL08/login (desktop + tablet + mobile captures).
+
+   Observed target breakpoints (do NOT invent others):
+     max-width 700px  -> Aptia logo hidden in header
+     min-width 768px  -> .l-mas-login-section width 760, two floated columns 340
+     min-width 960px  -> .l-mas-login-section width 920, columns 420, card padding 40px 20px
+     768px-1023px     -> .smb-main gutter 20px
+     1025px-1440px    -> .smb-main gutter 40px
+     min-width 1441px -> .smb-main gutter 0, max-width 1340px
+*/
+
+@font-face {
+  font-family: "proxima_nova_regular";
+  src: url("/fonts/ProximaNova-Reg-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Body font family used by the target (`proxima_nova_rgregular`). */
+@font-face {
+  font-family: "proxima_nova_rgregular";
+  src: url("/fonts/ProximaNova-Reg-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "proxima_nova_ltsemibold";
+  src: url("/fonts/ProximaNova-Sbold-webfont.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body.aptia-login {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: rgb(240, 240, 240);
+  color: rgb(0, 0, 0);
+  font-family: proxima_nova_rgregular, arial, Tahoma, Geneva, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* Target link color + hover (body-scoped so other routes stay untouched). */
+body.aptia-login a {
+  color: rgb(0, 114, 43);
+}
+
+body.aptia-login a:hover,
+body.aptia-login a:focus {
+  color: rgb(0, 114, 43);
+  text-decoration: underline;
+  outline: 0;
+}
+
+/* —— Header (70px, white, soft bottom shadow) —— */
+.evo-header {
+  background: #fff;
+  height: 70px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 2px 0;
+  position: relative;
+  z-index: 1000;
+  flex-shrink: 0;
+}
+
+.evo-top-bar {
+  background: #fff;
+  height: 70px;
+  line-height: 70px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0 10px;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* Target: `mas-client-logo > img, header > nav > ul > img { max-height:55px; margin-top:10px }` */
+.evo-top-bar .client-logo,
+.evo-top-bar .aptia-logo {
+  display: block;
+  max-height: 55px;
+  width: auto;
+  height: auto;
+  margin-top: 10px;
+  object-fit: contain;
+}
+
+/* Target hides only the Aptia logo below 700px. */
+@media (max-width: 700px) {
+  .evo-top-bar .aptia-logo {
+    display: none;
+  }
+}
+
+/* —— Main (`.smb-main` on the landing only) —— */
+.login-main {
+  flex: 1 0 auto;
+  width: 100%;
+  padding: 40px 20px 60px;
+}
+
+@media (min-width: 641px) {
+  .login-main {
+    padding: 60px 20px 80px;
+  }
+}
+
+/* Landing geometry — declared after `.login-main` so it wins the cascade.
+   `display: table` is what makes the target overflow to 800px at a 768px
+   viewport (fixed 760px section + 40px gutters) while staying fluid below
+   768px — reproduced, not invented. */
+.smb-main {
+  position: relative;
+  display: table;
+  width: 100%;
+  margin: 2.5rem auto 6.25rem;
+  padding: 0;
+}
+
+@media only screen and (min-width: 48em) and (max-width: 64em) {
+  .smb-main {
+    padding: 0 1.25rem;
+  }
+}
+
+@media only screen and (min-width: 64.0625em) and (max-width: 90em) {
+  .smb-main {
+    padding: 0 2.5rem;
+  }
+}
+
+@media only screen and (min-width: 90.0625em) {
+  .smb-main {
+    padding: 0;
+    max-width: 83.75rem;
+  }
+}
+
+/* —— Card shell —— */
+.l-mas-login-section {
+  box-sizing: border-box;
+  padding: 20px;
+  font-family: proxima_nova_regular, Arial, Helvetica, sans-serif;
+}
+
+@media (min-width: 768px) {
+  .l-mas-login-section {
+    margin: 40px auto;
+    width: 760px;
+  }
+}
+
+@media (min-width: 960px) {
+  .l-mas-login-section {
+    width: 920px;
+  }
+}
+
+.l-mas-login-wrap {
+  padding: 20px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: rgba(0, 0, 0, 0.3) 0 0 5px 0;
+  font-family: proxima_nova_regular, Arial, Helvetica, sans-serif;
+}
+
+.l-mas-login-wrap::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.l-mas-login-form-wrap {
+  box-sizing: border-box;
+  margin: 0 0 20px;
+  border-bottom: 1px solid rgb(204, 204, 204);
+}
+
+.l-mas-registration-wrap {
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .l-mas-login-form-wrap {
+    float: left;
+    padding: 0 20px;
+    width: 340px;
+    border: none;
+    border-right: 1px solid rgb(204, 204, 204);
+  }
+
+  .l-mas-registration-wrap {
+    position: relative;
+    left: -1px;
+    float: left;
+    padding: 0 20px;
+    width: 340px;
+    border-left: 1px solid rgb(204, 204, 204);
+  }
+}
+
+/* The deeper card padding only kicks in at 960px (measured on the target:
+   at 768-959 the wrap keeps its 20px padding while columns are 340 wide). */
+@media (min-width: 960px) {
+  .l-mas-login-wrap {
+    padding: 40px 20px;
+  }
+
+  .l-mas-login-form-wrap {
+    padding: 0 40px;
+    width: 420px;
+  }
+
+  .l-mas-registration-wrap {
+    padding: 0 40px;
+    width: 420px;
+  }
+}
+
+/* —— Type —— */
+.mas-h2 {
+  margin: 0 0 10px;
+  color: rgb(64, 64, 64);
+  font-family: proxima_nova_regular, Arial, Helvetica, sans-serif;
+  font-size: 28px;
+  font-weight: 100;
+  line-height: 1.4;
+}
+
+.l-mas-login-form-wrap > .mas-h2,
+.l-mas-registration-wrap > .mas-h2 {
+  margin: 0 0 -5px;
+}
+
+.mas-p,
+.mas-sub {
+  margin: 0 0 20px;
+  color: rgb(128, 128, 128);
+  font-family: proxima_nova_regular, Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.mas-link {
+  color: rgb(0, 114, 43);
+  text-decoration: none;
+}
+
+.mas-link:hover {
+  color: rgb(0, 114, 43);
+  text-decoration: underline;
+}
+
+.mas-forgot {
+  margin: 20px 0;
+  color: rgb(128, 128, 128);
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* —— Form —— */
+.mas-form,
+.l-mas-login-form {
+  margin: 20px 0;
+  max-width: 420px;
+}
+
+.mas-form-group {
+  margin: 0 0 20px;
+}
+
+.l-mas-registration-form {
+  margin: 20px 0;
+}
+
+.mas-form-group label,
+.mas-label {
+  display: inline-block;
+  margin: 0 0 5px;
+  color: rgb(128, 128, 128);
+  font-family: proxima_nova_regular, Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.mas-form-control {
+  display: block;
+  width: 100%;
+  height: 45px;
+  margin: 3px 0 22px;
+  padding: 6px 12px;
+  color: rgb(64, 64, 64);
+  font-family: proxima_nova_regular, Arial, Helvetica, sans-serif;
+  font-size: 22px;
+  line-height: 1.4;
+  background: #fff;
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.1) 2px 2px 3px 0 inset;
+  outline: none;
+  appearance: none;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+
+#username,
+#user-id {
+  font-size: 18px;
+}
+
+/* Target password field is taller (measured 54px vs 45px). */
+.mas-form-control[type="password"] {
+  height: 54px;
+  font-size: 22px;
+}
+
+/* Target lowercases the username field. */
+.mas-value-lower {
+  text-transform: lowercase;
+}
+
+.mas-form-control:focus {
+  border-color: rgb(0, 209, 124);
+  box-shadow:
+    rgba(0, 0, 0, 0.075) 0 1px 1px inset,
+    rgba(67, 255, 100, 0.85) 0 0 8px;
+}
+
+/* —— Buttons —— */
+.mas-btn {
+  display: inline-block;
+  margin: 0 2px 0 0;
+  padding: 13px 26px;
+  font-family: proxima_nova_regular, Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  border-radius: 100px;
+  cursor: pointer;
+  appearance: none;
+  background-color: transparent;
+  color: rgb(0, 109, 158);
+  border: none;
+}
+
+.mas-btn:hover,
+.mas-btn:focus,
+.mas-btn:active,
+.mas-btn:visited {
+  border-radius: 100px;
+  background-color: rgb(0, 209, 124);
+  border: 2px solid rgb(0, 209, 124);
+  color: rgb(18, 54, 70);
+}
+
+.mas-btn-primary,
+.mas-btn-login,
+.mas-btn-outline {
+  border-radius: 100px;
+  border: 2px solid rgb(0, 209, 124);
+  color: rgb(18, 54, 70);
+  background-color: #fff;
+}
+
+.mas-btn[disabled],
+.mas-btn[disabled]:hover,
+.mas-btn[disabled]:focus,
+.mas-btn[disabled]:active,
+.mas-btn[disabled]:visited {
+  border-color: rgba(128, 128, 128, 0.55);
+  background: rgba(128, 128, 128, 0.55);
+  color: rgb(230, 229, 229);
+  cursor: default;
+  opacity: 1;
+}
+
+.mas-btns-group {
+  margin-top: 20px;
+}
+
+/* —— Registration help links —— */
+.mas-help-list,
+.sr_links {
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+  font-size: 16px;
+  line-height: 1.32;
+}
+
+.mas-help-list li,
+.sr_links li {
+  margin: 0 0 16px;
+}
+
+.mas-help-list a,
+.sr_links a {
+  color: rgb(0, 114, 43);
+  text-decoration: none;
+}
+
+.mas-help-list a:hover,
+.sr_links a:hover {
+  text-decoration: underline;
+}
+
+.mas-help-list .fa-chevron-circle-right,
+.sr_links .fa-chevron-circle-right {
+  color: rgb(0, 114, 43);
+  font-size: 16px;
+}
+
+/* —— Footer —— */
+.footer-meta-wrap {
+  flex-shrink: 0;
+  width: 100%;
+  min-height: 103px;
+  padding-top: 32px;
+  background: rgb(18, 54, 70);
+  border-top: 1px solid rgb(230, 229, 229);
+  text-align: center;
+}
+
+/* Prefixed with `body.aptia-login` so these beat the generic `body.aptia-login a`
+   link color (2 elements vs 1 in the specificity tie-break). */
+body.aptia-login .footer-meta-wrap a {
+  display: inline-block;
+  padding: 15px 5px;
+  color: rgb(179, 179, 179);
+  font-family: NotoSans-Regular, "Helvetica Neue", helvetica, arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+body.aptia-login .footer-meta-wrap a:hover {
+  color: rgb(179, 179, 179);
+  text-decoration: underline;
+}
+
+.footer-meta-wrap .sep {
+  margin: 0 4px;
+  color: rgb(112, 112, 112);
+  font-size: 16px;
+}
+
+/* —— Verification method / OTP (Aptia chrome, not Wealthcare) —— */
+.verify-panel {
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.verify-panel-inner {
+  width: 100%;
+}
+
+.verify-error {
+  margin: 0 0 16px;
+  color: #c61a1a;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.verify-method-fieldset {
+  border: 0;
+  margin: 0 0 20px;
+  padding: 0;
+  min-width: 0;
+}
+
+.verify-method-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.verify-method-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 0;
+  padding: 14px 16px;
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 3px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.verify-method-card.is-selected {
+  border-color: #00d17c;
+  box-shadow: 0 0 0 1px #00d17c;
+}
+
+.verify-method-radio {
+  margin-top: 4px;
+  flex-shrink: 0;
+  accent-color: #00722b;
+}
+
+.verify-method-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.verify-method-title {
+  color: rgb(64, 64, 64);
+  font-family: proxima_nova_ltsemibold, proxima_nova_regular, Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.verify-method-blurb {
+  color: rgb(128, 128, 128);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.verify-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+  max-width: 280px;
+}
+
+.verify-cancel {
+  text-align: center;
+}
+
+.verify-back {
+  background: none;
+  border: 0;
+  padding: 8px 0;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: left;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+.verify-method-fieldset.is-busy,
+.verify-otp-form.is-busy {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.mas-btn-login.is-loading {
+  opacity: 1;
+  cursor: wait;
+}

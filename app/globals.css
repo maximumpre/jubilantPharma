@@ -1,0 +1,21 @@
+@import "tailwindcss";
+@import "./aptia-login.css";
+@import "../components/three-dot-spinner.css";
+
+:root {
+  --background: rgb(240, 240, 240);
+  --foreground: rgb(0, 0, 0);
+  --font-sans: proxima_nova_regular, Arial, Helvetica, sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: proxima_nova_regular, Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}

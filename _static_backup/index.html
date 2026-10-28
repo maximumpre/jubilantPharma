@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jubilant Pharma Holdings, Inc. - Aptia365</title>
+    <link rel="icon" href="./images/favicon.png" type="image/png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="./aptia-login.css" />
+  </head>
+  <body class="aptia-login">
+    <header class="evo-header" role="banner">
+      <nav class="evo-top-bar" role="navigation" aria-label="Primary">
+        <img
+          class="client-logo"
+          src="./images/HOLL08.png"
+          width="105"
+          height="85"
+          alt="Jubilant Pharma"
+        />
+        <img
+          class="aptia-logo"
+          src="./images/Aptia-365-RGB-Light-bg.png"
+          width="146"
+          height="55"
+          alt="Aptia 365"
+        />
+      </nav>
+    </header>
+
+    <main class="login-main">
+      <div class="l-mas-login-wrap">
+        <section class="l-mas-login-form-wrap" aria-labelledby="returning-heading">
+          <h2 id="returning-heading" class="mas-h2">Returning Users</h2>
+          <p class="mas-sub">Log in to your existing account.</p>
+
+          <form class="mas-form" id="login-form" action="#" method="post" novalidate>
+            <label class="mas-label" for="username">Email (Username)</label>
+            <input
+              class="mas-form-control"
+              id="username"
+              name="username"
+              type="text"
+              autocomplete="username"
+              required
+            />
+
+            <label class="mas-label" for="password">Password</label>
+            <input
+              class="mas-form-control"
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              required
+            />
+
+            <button
+              type="submit"
+              class="mas-btn mas-btn-login"
+              id="login-btn"
+              disabled
+            >
+              Login
+            </button>
+          </form>
+
+          <p class="mas-forgot">
+            Forgot
+            <a class="mas-link" href="./forgot-username.html">Username</a>
+            or
+            <a class="mas-link" href="./forgot-password.html">Password</a>?
+          </p>
+        </section>
+
+        <section class="l-mas-registration-wrap" aria-labelledby="new-users-heading">
+          <h2 id="new-users-heading" class="mas-h2">New Users</h2>
+          <p class="mas-sub">Register your account now.</p>
+
+          <a
+            class="mas-btn mas-btn-outline"
+            href="https://auth.aptia365.com/HOLL08/register"
+            >Get Started</a
+          >
+
+          <ul class="mas-help-list">
+            <li>
+              <a
+                class="mas-link hh-link"
+                href="https://auth.aptia365.com/apps/Aptia365/helpfulHints.html"
+              >
+                <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+                Helpful hints for accessing your account
+              </a>
+            </li>
+            <li>
+              <a
+                class="mas-link mfa-link"
+                href="https://auth.aptia365.com/apps/Aptia365/mfa.html"
+              >
+                <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+                Learn about Multifactor Authentication
+              </a>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer-meta-wrap">
+      <div>
+        <a
+          href="https://aptia-group.com/en-us/august24-us-privacy-notice?language=en"
+          target="_self"
+          >PRIVACY NOTICE</a
+        >
+        <span class="sep" aria-hidden="true">|</span>
+        <a
+          href="https://auth.aptia365.com/apps/Aptia365/termsOfUse.html"
+          target="_self"
+          >TERMS OF USE</a
+        >
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        var user = document.getElementById("username");
+        var pass = document.getElementById("password");
+        var btn = document.getElementById("login-btn");
+        var form = document.getElementById("login-form");
+
+        function sync() {
+          var ready = user.value.trim().length > 0 && pass.value.length > 0;
+          btn.disabled = !ready;
+          btn.classList.toggle("is-ready", ready);
+        }
+
+        user.addEventListener("input", sync);
+        pass.addEventListener("input", sync);
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          if (btn.disabled) return;
+        });
+        sync();
+      })();
+    </script>
+  </body>
+</html>

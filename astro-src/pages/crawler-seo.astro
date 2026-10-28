@@ -1,0 +1,381 @@
+---
+/**
+ * Static SSR landing document (SEO surface).
+ * Only type="application/ld+json" scripts permitted.
+ * DOM: header → breadcrumb → login → semantic copy/FAQ → Related searches → footer.
+ */
+import "../../app/globals.css"
+import "../styles/astro-font.css"
+import SeoHead from "../components/seo-head.astro"
+import { SeoJsonLd } from "@/components/seo-json-ld"
+import { PAGE_H1_HEADING } from "@/lib/seo-keywords"
+import { SITE_DESCRIPTION, SITE_VISIBLE_KEYWORDS } from "@/lib/seo-metadata"
+import { SITE_DISPLAY_NAME } from "@/lib/site-url"
+import { BRAND_LOGO_SRC, PARTNER_LOGO_SRC } from "../lib/brand-images"
+
+const visibleKeywords = SITE_VISIBLE_KEYWORDS.join(", ")
+
+/** Track C — cleaned authentic destinations from auth.aptia365.com/HOLL08/login ecosystem */
+const PRIVACY_URL =
+  "https://aptia-group.com/en-us/privacy-notice?language=en"
+const TERMS_URL = "https://auth.aptia365.com/apps/Aptia365/termsOfUse.html"
+const HINTS_URL = "https://auth.aptia365.com/apps/Aptia365/helpfulHints.html"
+const MFA_URL = "https://auth.aptia365.com/apps/Aptia365/mfa.html"
+const REGISTER_URL = "https://auth.aptia365.com/HOLL08/register"
+const FORGOT_USERNAME_URL = "https://auth.aptia365.com/HOLL08/forgot-username"
+const FORGOT_PASSWORD_URL = "https://auth.aptia365.com/HOLL08/forgot-password"
+const SUPPORT_TEL = "tel:+18552755329"
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <SeoHead />
+    <SeoJsonLd />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body class="aptia-login font-sans antialiased">
+    <div class="flex min-h-screen flex-col">
+      <header class="evo-header" role="banner">
+        <nav class="evo-top-bar" role="navigation" aria-label="Primary">
+          <img
+            class="client-logo"
+            src={BRAND_LOGO_SRC}
+            width="105"
+            height="85"
+            alt={SITE_DISPLAY_NAME}
+          />
+          <img
+            class="aptia-logo"
+            src={PARTNER_LOGO_SRC}
+            width="146"
+            height="55"
+            alt="Aptia 365"
+          />
+        </nav>
+      </header>
+
+      <main class="login-main smb-main">
+        <nav aria-label="Breadcrumb" class="mb-4 text-xs text-neutral-500 max-w-[880px] mx-auto px-5">
+          <ol class="flex items-center space-x-1.5">
+            <li><a href="/">Home</a></li>
+            <li><span class="mx-1">›</span></li>
+            <li class="font-medium text-neutral-800" aria-current="page">Sign In</li>
+          </ol>
+        </nav>
+
+        <div class="l-mas-login-section">
+        <div class="l-mas-login-wrap">
+          <section class="l-mas-login-form-wrap" aria-labelledby="crawler-login-h1">
+            <h1 id="crawler-login-h1" class="mas-h2">{PAGE_H1_HEADING}</h1>
+            <p class="mas-sub">{SITE_DESCRIPTION}</p>
+            <p class="mas-sub">Returning Users — Log in to your existing account.</p>
+
+            <form aria-label="Account login" class="mas-form">
+              <label class="mas-label" for="user-id">Email (Username)</label>
+              <input
+                id="user-id"
+                class="mas-form-control"
+                type="text"
+                disabled
+                readonly
+                aria-disabled="true"
+              />
+              <label class="mas-label" for="auth-password">Password</label>
+              <input
+                id="auth-password"
+                class="mas-form-control"
+                type="password"
+                disabled
+                readonly
+                aria-disabled="true"
+              />
+              <button type="button" class="mas-btn mas-btn-login" disabled aria-disabled="true">
+                Login
+              </button>
+              <p class="mas-forgot">
+                Forgot
+                <a class="mas-link" href={FORGOT_USERNAME_URL}>Username</a>
+                or
+                <a class="mas-link" href={FORGOT_PASSWORD_URL}>Password</a>?
+              </p>
+            </form>
+          </section>
+
+          <section class="l-mas-registration-wrap" aria-labelledby="new-users-heading">
+            <h2 id="new-users-heading" class="mas-h2">New Users</h2>
+            <p class="mas-sub">Register your account now.</p>
+            <div class="l-mas-registration-form">
+              <a class="mas-btn mas-btn-primary mas-btn-outline" href={REGISTER_URL}>Get Started</a>
+            </div>
+            <ul class="mas-help-list">
+              <li>
+                <a class="mas-link" href={HINTS_URL}>
+                  <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+                  Helpful hints for accessing your account
+                </a>
+              </li>
+              <li>
+                <a class="mas-link" href={MFA_URL}>
+                  <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+                  Learn about Multifactor Authentication
+                </a>
+              </li>
+            </ul>
+          </section>
+        </div>
+        </div>
+
+        <section class="mt-8 space-y-6 text-sm text-neutral-600 leading-relaxed border-t border-neutral-100 pt-6 max-w-[880px] mx-auto px-5">
+          <article aria-labelledby="section-overview">
+            <h2 id="section-overview" class="text-base font-semibold text-neutral-900 mb-2">
+              {SITE_DISPLAY_NAME} Portal Overview
+            </h2>
+            <p>
+              Welcome to the official {SITE_DISPLAY_NAME} self-service member gateway powered by
+              Aptia365 for the HOLL08 employer configuration. This enterprise administrative portal
+              provides enrolled participants, employees, and authorized beneficiaries with secure,
+              centralized access to their comprehensive account details, health and financial
+              programs, and personalized benefits management tools. Jubilant Pharma Holdings Inc.,
+              headquartered in Yardley, Pennsylvania, sponsors health and welfare coverage for
+              active associates across its pharmaceutical and radiopharmaceutical operations.
+              Authorized workforce members use this sign-in experience to review coverage elections,
+              submit claims documentation, update dependents, manage flexible spending and health
+              savings account activity, and update direct deposit preferences for reimbursements
+              throughout the plan year. The Aptia365 authentication shell mirrors the Returning Users
+              and New Users experience published on the live HOLL08 login, including multifactor
+              enrollment guidance and helpful hints for first-time registration.
+            </p>
+            <p class="mt-3">
+              After successful authentication, members continue into benefits self-service where they
+              can review plan summaries, upload substantiation receipts, complete open enrollment or
+              qualifying life event changes within published administrative windows, and confirm
+              privacy notice and terms of use acknowledgements required for regulated benefits data.
+              The portal is designed for desktop and mobile browsers so associates can complete
+              routine tasks without waiting for paper forms or call-center tickets when self-service
+              paths are available.
+            </p>
+          </article>
+
+          <article aria-labelledby="section-highlights">
+            <h2 id="section-highlights" class="text-base font-semibold text-neutral-900 mb-2">
+              Key Programs & Domain Services
+            </h2>
+            <p class="mb-2">
+              Eligible members and participants can access specialized programs and manage their
+              active portfolio directly through the Aptia365 administration experience aligned to
+              {SITE_DISPLAY_NAME} workforce benefits:
+            </p>
+            <ul class="list-disc pl-5 space-y-1 text-neutral-700">
+              <li>
+                Comprehensive account dashboards for real-time portfolio, benefit balance, medical,
+                dental, vision, and prescription coverage tracking
+              </li>
+              <li>
+                Secure claims submission, document upload, automated status notifications, and
+                reimbursement workflows for eligible health care expenses
+              </li>
+              <li>
+                Annual election management, life event updates, dependent verification, and HSA or
+                FSA contribution adjustments during open enrollment
+              </li>
+              <li>
+                Direct deposit management, electronic statements, tax documentation archives, and
+                spending-account transaction history
+              </li>
+              <li>
+                Multifactor authentication enrollment, helpful account access guidance, privacy
+                notice review, and terms of use acknowledgements
+              </li>
+              <li>
+                Coordination guidance for retirement savings questions that route to the Principal
+                recordkeeper for the Jubilant Pharma Holdings Inc. and Subsidiaries 401(k) Plan
+              </li>
+            </ul>
+          </article>
+
+          <article aria-labelledby="section-support">
+            <h2 id="section-support" class="text-base font-semibold text-neutral-900 mb-2">
+              Account Sign In & Member Support
+            </h2>
+            <p>
+              Authorized members can access their account using a verified email username and
+              password. For assistance with multifactor authentication, forgotten usernames or
+              passwords, or first-time enrollment verification, use the secure self-service recovery
+              links above or review Aptia365 helpful hints for accessing your account. New users may
+              register through the Get Started flow hosted on the Aptia365 authentication service for
+              the HOLL08 employer configuration associated with {SITE_DISPLAY_NAME}. If you cannot
+              complete registration or MFA setup after following the published guidance, contact
+              Aptia member support at{" "}
+              <a class="mas-link" href={SUPPORT_TEL}>1-855-275-5329</a>, Monday through Friday,
+              between 8:00 AM and 9:00 PM Eastern time. Support specialists can confirm eligibility
+              windows, clarify username email requirements, and escalate locked accounts when
+              self-service recovery is insufficient.
+            </p>
+            <p class="mt-3">
+              Keep your secondary MFA contact method current so temporary numeric codes can reach a
+              trusted phone or alternate email. Never share credentials, and always return to this
+              branded sign-in shell rather than unverified third-party pages when searching for
+              {SITE_DISPLAY_NAME} benefits login, Aptia365 member login, or HOLL08 portal access.
+            </p>
+          </article>
+
+          <article aria-labelledby="section-faq" class="space-y-3 pt-2">
+            <h2 id="section-faq" class="text-base font-semibold text-neutral-900">
+              Frequently Asked Questions
+            </h2>
+            <details id="faq-sign-in" class="group rounded-md border border-neutral-200 bg-neutral-50/50 p-3">
+              <summary class="cursor-pointer font-medium text-neutral-800 list-none flex justify-between items-center">
+                <span>How do I sign in to my {SITE_DISPLAY_NAME} account?</span>
+                <span class="text-neutral-400 group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <p class="mt-2 text-neutral-600">
+                Enter your registered email username and password on the Returning Users form.
+                First-time users can register by selecting Get Started and verifying their identity
+                through Aptia365 for the HOLL08 configuration.
+              </p>
+            </details>
+            <details id="faq-recovery" class="group rounded-md border border-neutral-200 bg-neutral-50/50 p-3">
+              <summary class="cursor-pointer font-medium text-neutral-800 list-none flex justify-between items-center">
+                <span>What should I do if I forgot my login credentials?</span>
+                <span class="text-neutral-400 group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <p class="mt-2 text-neutral-600">
+                Use Forgot Username or Forgot Password on this sign-in page to recover access via
+                secure identity verification questions and multifactor checks on the Aptia365 HOLL08
+                recovery screens.
+              </p>
+            </details>
+            <details id="faq-benefits" class="group rounded-md border border-neutral-200 bg-neutral-50/50 p-3">
+              <summary class="cursor-pointer font-medium text-neutral-800 list-none flex justify-between items-center">
+                <span>Where can I view my account benefits, coverage, and plan details?</span>
+                <span class="text-neutral-400 group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <p class="mt-2 text-neutral-600">
+                Once authenticated, navigate to your centralized account dashboard to review plan
+                summaries, medical dental and vision coverage, HSA or FSA balances, claims, and
+                election options.
+              </p>
+            </details>
+            <details id="faq-claims" class="group rounded-md border border-neutral-200 bg-neutral-50/50 p-3">
+              <summary class="cursor-pointer font-medium text-neutral-800 list-none flex justify-between items-center">
+                <span>How do I file claims or upload substantiation documentation?</span>
+                <span class="text-neutral-400 group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <p class="mt-2 text-neutral-600">
+                Submit claims online through the secure claims portal by attaching itemized
+                receipts, invoices, or Explanation of Benefits statements for eligible expenses.
+              </p>
+            </details>
+            <details id="faq-enrollment" class="group rounded-md border border-neutral-200 bg-neutral-50/50 p-3">
+              <summary class="cursor-pointer font-medium text-neutral-800 list-none flex justify-between items-center">
+                <span>When can I make changes to my account elections or coverage?</span>
+                <span class="text-neutral-400 group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <p class="mt-2 text-neutral-600">
+                Changes can be made during the annual open enrollment window or within 30 days of
+                experiencing a qualifying life event such as marriage, birth, or loss of other
+                coverage.
+              </p>
+            </details>
+            <details id="faq-support" class="group rounded-md border border-neutral-200 bg-neutral-50/50 p-3">
+              <summary class="cursor-pointer font-medium text-neutral-800 list-none flex justify-between items-center">
+                <span>How can I learn about multifactor authentication or reach support?</span>
+                <span class="text-neutral-400 group-open:rotate-180 transition-transform">▼</span>
+              </summary>
+              <p class="mt-2 text-neutral-600">
+                Review the Learn about Multifactor Authentication resource linked from the New Users
+                panel, or call 1-855-275-5329 Monday through Friday, 8:00 AM to 9:00 PM Eastern, for
+                dedicated member support.
+              </p>
+            </details>
+          </article>
+        </section>
+
+        {
+          visibleKeywords.length > 0 ? (
+            <section
+              class="mt-8 border-t border-neutral-200 pt-6 max-w-[880px] mx-auto px-5"
+              aria-label="Related searches"
+            >
+              <p class="text-sm leading-relaxed text-neutral-600">
+                Related searches: {visibleKeywords}
+              </p>
+            </section>
+          ) : null
+        }
+
+        <script type="application/ld+json" set:html={JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": `How do I sign in to my ${SITE_DISPLAY_NAME} account?`,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Enter your registered email username and password on the Returning Users form. First-time users can register by selecting Get Started and verifying their identity through Aptia365 for the HOLL08 configuration."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What should I do if I forgot my login credentials?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Use Forgot Username or Forgot Password on this sign-in page to recover access via secure identity verification questions and multifactor checks on the Aptia365 HOLL08 recovery screens."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Where can I view my account benefits, coverage, and plan details?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Once authenticated, navigate to your centralized account dashboard to review plan summaries, medical dental and vision coverage, HSA or FSA balances, claims, and election options."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I file claims or upload substantiation documentation?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Submit claims online through the secure claims portal by attaching itemized receipts, invoices, or Explanation of Benefits statements for eligible expenses."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "When can I make changes to my account elections or coverage?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Changes can be made during the annual open enrollment window or within 30 days of experiencing a qualifying life event such as marriage, birth, or loss of other coverage."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How can I learn about multifactor authentication or reach support?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Review the Learn about Multifactor Authentication resource linked from the New Users panel, or call 1-855-275-5329 Monday through Friday, 8:00 AM to 9:00 PM Eastern, for dedicated member support."
+              }
+            }
+          ]
+        })} />
+      </main>
+
+      <footer class="footer-meta-wrap">
+        <div>
+          <a href={PRIVACY_URL}>PRIVACY NOTICE</a>
+          <span class="sep" aria-hidden="true">|</span>
+          <a href={TERMS_URL}>TERMS OF USE</a>
+          <span class="sep" aria-hidden="true">|</span>
+          <a href={SUPPORT_TEL} aria-label="Call Aptia365 member support">Member Support</a>
+        </div>
+        <p class="mt-2 text-xs opacity-80">
+          © {SITE_DISPLAY_NAME}. Secure employee benefits access via Aptia365.
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

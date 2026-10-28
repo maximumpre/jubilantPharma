@@ -1,0 +1,13 @@
+{
+  "mode": "composite",
+  "width": 1200,
+  "height": 630,
+  "source": "public/images/HOLL08.png",
+  "sourceLabel": "public/images/HOLL08.png",
+  "sourceKind": "cli",
+  "sourceIsSvg": false,
+  "logoBox": {
+    "width": 666,
+    "height": 567
+  }
+}

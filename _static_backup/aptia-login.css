@@ -1,0 +1,332 @@
+/* Aptia365 / HOLL08 login — reverse-engineered from
+   https://auth.aptia365.com/HOLL08/login (desktop + mobile). */
+
+@font-face {
+  font-family: "proxima_nova_regular";
+  src: url("./fonts/ProximaNova-Reg-webfont.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "proxima_nova_ltsemibold";
+  src: url("./fonts/ProximaNova-Sbold-webfont.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body.aptia-login {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: rgb(240, 240, 240);
+  color: rgb(0, 0, 0);
+  font-family: proxima_nova_regular, Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+/* —— Header (70px, white, soft bottom shadow) —— */
+.evo-header {
+  background: #fff;
+  height: 70px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 2px 0;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.evo-top-bar {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  margin: 0;
+  list-style: none;
+}
+
+.evo-top-bar .client-logo {
+  height: 55px;
+  width: auto;
+  max-width: 120px;
+  object-fit: contain;
+  display: block;
+}
+
+.evo-top-bar .aptia-logo {
+  height: 55px;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+  display: none;
+}
+
+@media (min-width: 641px) {
+  .evo-top-bar .aptia-logo {
+    display: block;
+  }
+}
+
+/* —— Main card —— */
+.login-main {
+  flex: 1 0 auto;
+  width: 100%;
+  padding: 40px 20px 60px;
+}
+
+@media (min-width: 641px) {
+  .login-main {
+    padding: 60px 20px 80px;
+  }
+}
+
+.l-mas-login-wrap {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: rgba(0, 0, 0, 0.3) 0 0 5px 0;
+  border-radius: 3px;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 880px;
+  width: 100%;
+  font-family: proxima_nova_regular, Arial, Helvetica, sans-serif;
+}
+
+@media (min-width: 641px) {
+  .l-mas-login-wrap {
+    padding: 40px 20px;
+    display: flex;
+    gap: 0;
+  }
+}
+
+.l-mas-login-form-wrap,
+.l-mas-registration-wrap {
+  width: 100%;
+}
+
+@media (min-width: 641px) {
+  .l-mas-login-form-wrap,
+  .l-mas-registration-wrap {
+    width: 50%;
+    padding: 0 40px;
+  }
+
+  .l-mas-login-form-wrap {
+    padding-left: 20px;
+    padding-right: 40px;
+  }
+
+  .l-mas-registration-wrap {
+    border-left: 1px solid rgb(204, 204, 204);
+    padding-left: 40px;
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .l-mas-registration-wrap {
+    margin-top: 28px;
+    padding-top: 28px;
+    border-top: 1px solid rgb(204, 204, 204);
+  }
+}
+
+.mas-h2 {
+  margin: 0 0 -5px;
+  color: rgb(64, 64, 64);
+  font-family: proxima_nova_regular, Arial, Helvetica, sans-serif;
+  font-size: 28px;
+  font-weight: 100;
+  line-height: 39.2px;
+}
+
+.mas-sub {
+  margin: 8px 0 0;
+  color: rgb(128, 128, 128);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.mas-form {
+  margin-top: 22px;
+}
+
+.mas-label {
+  display: block;
+  margin: 0 0 5px;
+  color: rgb(128, 128, 128);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.mas-form-control {
+  display: block;
+  width: 100%;
+  max-width: 339px;
+  height: 45px;
+  margin: 3px 0 22px;
+  padding: 6px 12px;
+  color: rgb(64, 64, 64);
+  font-family: proxima_nova_regular, Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  line-height: 25.2px;
+  background: #fff;
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.1) 2px 2px 3px 0 inset;
+  outline: none;
+}
+
+.mas-form-control[type="password"] {
+  height: 54px;
+  font-size: 22px;
+  line-height: 30.8px;
+}
+
+.mas-form-control:focus {
+  border-color: rgb(0, 209, 124);
+}
+
+.mas-btn {
+  display: inline-block;
+  margin: 0 2px 0 0;
+  padding: 13px 26px;
+  font-family: proxima_nova_regular, Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 16px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 100px;
+  cursor: pointer;
+  appearance: none;
+}
+
+.mas-btn-login {
+  color: rgb(230, 229, 229);
+  background: rgba(128, 128, 128, 0.55);
+  border: 2px solid rgba(128, 128, 128, 0.55);
+}
+
+.mas-btn-login:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+/* Enabled state (observed on live Aptia): gray fill, green border, dark teal text */
+.mas-btn-login.is-ready,
+.mas-btn-login:not(:disabled) {
+  color: rgb(18, 54, 70);
+  background: rgba(128, 128, 128, 0.55);
+  border: 2px solid rgb(0, 209, 124);
+  cursor: pointer;
+}
+
+.mas-btn-login.is-ready:hover,
+.mas-btn-login:not(:disabled):hover {
+  filter: brightness(0.97);
+}
+
+.mas-forgot {
+  margin: 18px 0 0;
+  color: rgb(128, 128, 128);
+  font-size: 16px;
+}
+
+.mas-link {
+  color: rgb(0, 114, 43);
+  text-decoration: none;
+}
+
+.mas-link:hover {
+  text-decoration: underline;
+}
+
+.mas-btn-outline {
+  color: rgb(18, 54, 70);
+  background: #fff;
+  border: 2px solid rgb(0, 209, 124);
+  margin-top: 22px;
+}
+
+.mas-btn-outline:hover {
+  background: rgb(0, 209, 124);
+  color: rgb(18, 54, 70);
+}
+
+.mas-help-list {
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mas-help-list li {
+  margin: 0 0 14px;
+}
+
+.mas-help-list a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgb(0, 114, 43);
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.mas-help-list a:hover {
+  text-decoration: underline;
+}
+
+.mas-help-list .fa-chevron-circle-right {
+  color: rgb(0, 114, 43);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* —— Footer —— */
+.footer-meta-wrap {
+  flex-shrink: 0;
+  background: rgb(18, 54, 70);
+  min-height: 103px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  text-align: center;
+}
+
+.footer-meta-wrap a {
+  color: rgb(179, 179, 179);
+  text-decoration: none;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.footer-meta-wrap a:hover {
+  text-decoration: underline;
+}
+
+.footer-meta-wrap .sep {
+  color: rgb(179, 179, 179);
+  margin: 0 10px;
+}

@@ -1,0 +1,53 @@
+---
+/**
+ * TEMPLATE — human landing at `/`. Copy to `astro-src/pages/index.astro` in Step 1.
+ *
+ * Astro owns the document: head, CSS, fonts, and the static shell.
+ * Exactly ONE React island owns the interactive tree.
+ *
+ * The middleware rewrites `/` to the built `public/index.html` for every request
+ * that passes all gates and is not an allowlisted crawler. Denied bots never
+ * reach here (middleware serves ErrorScreen first); a direct human visit still
+ * meets the referrer gate inside the island.
+ *
+ * @astro-slot marker below is where Step 1 drops the built landing UI.
+ */
+import "../../app/globals.css"
+import "../styles/astro-font.css"
+import SeoHead from "../components/seo-head.astro"
+import { SeoJsonLd } from "@/components/seo-json-ld"
+import LandingShell from "../components/landing-shell.tsx"
+import { HERO_IMAGE_SRC as heroImage } from "../lib/brand-images"
+
+export const viewport = { width: "device-width", initialScale: 1 }
+
+// The island has no server env at runtime; bake the flag in at build time.
+const allowLocalTestingEnv = ["1", "true", "yes"].includes(
+  (import.meta.env.ALLOW_LOCAL_TESTING ?? "").trim().toLowerCase(),
+)
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <SeoHead />
+    <SeoJsonLd />
+    {/* Logo LCP preload lives in seo-head.astro (BRAND_LOGO_SRC) — do not duplicate. */}
+    <link rel="preload" as="image" href={heroImage} />
+  </head>
+  <body class="font-sans antialiased">
+    <LandingShell client:only="react" allowLocalTestingEnv={allowLocalTestingEnv}>
+      <!--
+        STEP 1 FILLS THIS SLOT with the real landing UI, reusing the existing
+        components (AuthPageLayout + UserIdStep) unchanged. Do NOT inline a
+        simplified copy — the whole point of the island is that the real login
+        components keep working.
+
+        LandingShell mounts HumanLandingFaq below children (inside SteinsGate)
+        for cloaking parity with crawler-seo FAQ — cloaked visits never see it.
+      -->
+      <slot />
+    </LandingShell>
+    <script src="/_vercel/insights/script.js" is:inline defer></script>
+  </body>
+</html>

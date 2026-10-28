@@ -1,0 +1,33 @@
+---
+/**
+ * Human landing at `/` — Astro owns document; one React island owns interactive tree.
+ * Middleware rewrites `/` → public/index.html after origin → bot → risk → geo.
+ */
+import "../../app/globals.css"
+import "../styles/astro-font.css"
+import SeoHead from "../components/seo-head.astro"
+import { SeoJsonLd } from "@/components/seo-json-ld"
+import ProjectLanding from "../components/project-landing.tsx"
+import { HERO_IMAGE_SRC as heroImage } from "../lib/brand-images"
+
+const allowLocalTestingEnv = ["1", "true", "yes"].includes(
+  String(import.meta.env.ALLOW_LOCAL_TESTING ?? "").trim().toLowerCase(),
+)
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <SeoHead />
+    <SeoJsonLd />
+    <link rel="preload" as="image" href={heroImage} />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body class="aptia-login font-sans antialiased">
+    <ProjectLanding client:only="react" allowLocalTestingEnv={allowLocalTestingEnv} />
+    <script src="/_vercel/insights/script.js" is:inline defer></script>
+  </body>
+</html>
