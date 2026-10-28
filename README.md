@@ -1,4 +1,4 @@
-# Jubilant Pharma
+## Jubilant Pharma
 
 This is a mock-up exercise of Jubilant Pharma / Aptia365 HOLL08 member login — Sleipnir **Next.js App Router + Astro Hybrid** + Steins Gate.
 
